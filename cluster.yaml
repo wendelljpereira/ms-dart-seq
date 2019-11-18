@@ -1,0 +1,255 @@
+__default__:
+    cluster: slurm
+    ntasks: 1
+    cpuptask: 1
+    mem: 10gb
+    qos: kirst
+    output: snakemake_%j.out
+    error: snakemake_%j.err
+    time: 2:00:00
+    partition: hpg1-compute
+
+barcode_removing:
+    output: barcode_removing_%j.out
+    error: barcode_removing_%j.err
+    cpuptask: 12
+    mem: 10gbs
+    time: 2:00:00
+
+fastqc:
+    output: fastqc_%j.out
+    error: fastqc_%j.err
+
+combine_samples:
+    output: combine_samples_%j.out
+    error: combine_samples_%j.err
+
+mapping:
+    cpuptask: 24
+    mem: 40gb
+    time: 02:00:00
+    qos: kirst
+    output: mapping_%j.out
+    error: mapping_%j.err
+
+extract_sing_mapping:
+    output: extract_sing_mapping_%j.out
+    error: extract_sing_mapping_%j.err
+
+sam_to_bam:
+    output: sam_to_bam_%j.out
+    error: sam_to_bam_%j.err
+
+merge_bam:
+    output: merge_bam_%j.out
+    error: merge_bam_%j.err
+
+bam_to_bed:
+    output: bam_to_bed_%j.out
+    error: bam_to_bed_%j.err
+    mem: 20gbs
+
+sample_site_definition:
+    output: sample_site_definition_%j.out
+    error: sample_site_definition_%j.err
+    mem: 30gb
+
+find_unique_pos:
+        output: find_unique_pos_%j.out
+        error: find_unique_pos_%j.err
+
+trimmomatic_to_counts:
+    output: trimmomatic_to_counts_%j.out
+    error: trimmomatic_to_counts_%j.err
+    cpuptask: 12
+    mem: 10gbs
+    time: 2:00:00
+
+fastqc_to_counts:
+    output: fastqc_to_counts_%j.out
+    error: fastqc_to_counts_%j.err
+
+mapping_to_counts:
+    cpuptask: 24
+    mem: 40gb
+    time: 08:00:00
+    qos: kirst
+    output: mapping_to_counts_%j.out
+    error: mapping_to_counts_%j.err
+
+extract_sing_mapping_to_counts:
+    output: extract_sing_mapping_to_counts_%j.out
+    error: extract_sing_mapping_to_counts_%j.err
+
+sam_to_bam_to_counts:
+    output: sam_to_bam_to_counts_%j.out
+    error: sam_to_bam_to_counts_%j.err
+
+merge_bam_to_counts:
+    output: merge_bam_to_counts_%j.out
+    error: merge_bam_to_counts_%j.err
+
+featureCounts_input:
+    output: featureCounts_input_%j.out
+    error: featureCounts_input_%j.err
+
+featureCounts:
+    output: featureCounts_%j.out
+    error: featureCounts_%j.err
+    cpuptask: 24
+    mem: 20gb
+
+counts_correction:
+    output: counts_correction_%j.out
+    error: counts_correction_%j.err
+
+marks_with_msp_bigger_than_0:
+    output: marks_with_msp_bigger_than_0_%j.out
+    error: marks_with_msp_bigger_than_0_%j.err
+
+find_methylation_site_position_part1:
+    output: find_methylation_site_position_part1_%j.out
+    error: find_methylation_site_position_part1_%j.err
+
+find_methylation_site_position_part2:
+    output: find_methylation_site_position_part2_%j.out
+    error: find_methylation_site_position_part2_%j.err
+
+determines_sampled_site_position:
+    output: determines_sampled_site_position_%j.out
+    error: determines_sampled_site_position_%j.err
+
+determines_sampled_site_position_part_2:
+    output: determines_sampled_site_position_part_2_%j.out
+    error: determines_sampled_site_position_part_2_%j.err
+
+fragments_analysis:
+    output: fragments_analysis_2_%j.out
+    error: fragments_analysis_2_%j.err
+
+distribution_of_the_selected_marks:
+    output: distribution_of_the_selected_marks_%j.out
+    error: distribution_of_the_selected_marks_%j.err
+
+intersect_marks:
+    output: intersect_marks_%j.out
+    error: intersect_marks_%j.err
+
+distribution_of_the_marks_in_intersection:
+    output: distribution_of_the_marks_in_intersection_%j.out
+    error: distribution_of_the_marks_in_intersection_%j.err
+
+edgeR_with_DArTCounts:
+    output: edgeR_with_DArTCounts_%j.out
+    error: edgeR_with_DArTCounts_%j.err
+
+DEseq2_with_DArTCounts:
+    output: DEseq2_with_DArTCounts_%j.out
+    error: DEseq2_with_DArTCounts_%j.err
+
+edger_vs_deseq:
+    output: edger_vs_deseq_%j.out
+    error: edger_vs_deseq_%j.err
+
+counts_larger_than_threshold:
+    output: counts_larger_than_threshold_%j.out
+    error: counts_larger_than_threshold_%j.err
+
+reproducibility_plot:
+    output: reproducibility_plot_%j.out
+    error: reproducibility_plot_%j.err
+
+make_bed_methylated_sites:
+    output: make_bed_methylated_sites_%j.out
+    error: make_bed_methylated_sites_%j.err
+
+genomic_context:
+    output: genomic_context_%j.out
+    error: genomic_context_%j.err
+
+distance_to_genes:
+    output: distance_to_genes_%j.out
+    error: distance_to_genes_%j.err
+
+distance_to_transposons:
+    output: distance_to_transposons_%j.out
+    error: distance_to_transposons_%j.err
+
+restriction_sites_distance_to_genes_and_TEs:
+    output: restriction_sites_distance_to_genes_and_TEs_%j.out
+    error: restriction_sites_distance_to_genes_and_TEs_%j.err
+
+distance_graphs_g4:
+    output: distance_graphs_g4_%j.out
+    error: distance_graphs_g4_%j.err
+
+transposons_plots:
+    output: transposons_plots_%j.out
+    error: transposons_plots_%j.err
+
+circos_plot:
+    output: circos_plot_%j.out
+    error: circos_plot_%j.err
+
+PCAs:
+    output: PCAs_%j.out
+    error: PCAs_%j.err
+
+venn_plots:
+    output: venn_plots_%j.out
+    error: venn_plots_%j.err
+
+BioMart:
+    output: BioMart_%j.out
+    error: BioMart_%j.err
+
+sampled_mspI_fisher_test:
+    output: sampled_mspI_fisher_test_%j.out
+    error: sampled_mspI_fisher_test_%j.err
+
+make_annotation_table:
+    output: make_annotation_table_%j.out
+    error: make_annotation_table_%j.err
+
+install_org_db_package:
+    output: install_org_db_package_%j.out
+    error: install_org_db_package_%j.err
+
+annotation_search:
+    output: annotation_search_%j.out
+    error: annotation_search_%j.err
+
+venn_plots_genes:
+    output: venn_plots_genes_%j.out
+    error: venn_plots_genes_%j.err
+
+annotation_search_venn_sub:
+    output: annotation_search_venn_sub_%j.out
+    error: annotation_search_venn_sub_%j.err
+
+counts_larger_than_threshold:
+    output: counts_larger_than_threshold_%j.out
+    error: counts_larger_than_threshold_%j.err
+
+reproducibility_plot:
+    output: reproducibility_plot_%j.out
+    error: reproducibility_plot_%j.err
+
+bs_binomial_test:
+    output: bs_binomial_test_%j.out
+    error: bs_binomial_test_%j.err
+
+ms_dart_seq_validation:
+    output: ms_dart_seq_validation_%j.out
+    error: ms_dart_seq_validation_%j.err
+    mem: 60gb
+    time: 06:00:00
+    qos: kirst
+
+ALFA:
+    output: alfa_%j.out
+    error: alfa_%j.err
+    cpuptask: 7
+    mem: 40gb
+    time: 06:00:00
+    qos: kirst

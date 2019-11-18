@@ -1,0 +1,472 @@
+necessary_files:
+    [
+    "mspI_pstI_sites.fa",
+    "Egrandis_297_v2.0.softmasked.fa",
+    "Egrandis_297_v2.0.gene_exons.gff3",
+    "Egrandis_297_v2.0_transposons.bed",
+    "BSgenome.Egrandis.JGI.297_2.0.tar.gz",
+    "E_grandis_circos_chr_sizes.txt",
+    "zr1276_1_CHG_meth.bb",
+    "zr1276_1_CHH_meth.bb",
+    "zr1276_1_CpG_meth.bb",
+    "bigBedToBed",
+    "brasuz_ms_dartseq_postions_renamed_counts.csv",
+    "brasuz_ms_dartseq_postions_renamed.bed",
+    "gene_features_sorted.bed",
+    "13059_2016_1059_MOESM4_ESM.csv"
+    ]
+
+required_files:
+    [
+    "adapters.fa",
+    "bam_to_samples_names.csv",
+    "msp_pst_sites_positions_sorted.bed",
+    "BSgenome.Egrandis.JGI.297_2.0.tar.gz",
+    "mspI_pstI_sites.fa",
+    "Egrandis_297_v2.0_transposons.bed",
+    "Egrandis_297_v2.0.gene_exons.gff3",
+    "E_grandis_all_genes_biomart.rda",
+    "13059_2016_1059_MOESM4_ESM.csv"
+    ]
+
+reference_genome: Egrandis_297_v2.0.softmasked.fa
+
+barcodes_files:
+    [
+    "barcodes_C9C2CANXX_2.txt",
+    "barcodes_C9C2CANXX_8.txt"
+    ]
+
+adapters_file: adapters.fa
+
+fastq:
+    [
+    "915800",
+    "915812",
+    "915824",
+    "915836",
+    "915848",
+    "915860",
+    "915871",
+    "915882",
+    "915883",
+    "916197",
+    "916198",
+    "916199",
+    "916200",
+    "916201",
+    "916202",
+    "916203",
+    "916204",
+    "916205"
+    ]
+
+combine_samples: "all_samples_without_barcodes_and_adapters.fq"
+combine_bam: all_samples.bam
+
+mapping:
+    fastq:
+        [
+    "no_mapped_mm0",
+    "no_mapped_mm1",
+    "no_mapped_mm2",
+    "no_mapped_mm3"
+        ]
+    sam:
+        [
+    "all_reads_mm0",
+    "all_reads_mm1",
+    "all_reads_mm2",
+    "all_reads_mm3"
+        ]
+    sam_samples:
+        [
+    "_mm0",
+    "_mm1",
+    "_mm2",
+    "_mm3"
+        ]
+
+n_of_mapped_reads:
+    file_name: mapped_reads_combined_samples.txt
+
+bam_to_bed:
+    bed_name: all_samples.bed
+
+enzymes_sites: msp_pst_sites_positions_sorted.bed
+
+sample_site_definition:
+    [
+    "enz_sites_sample_reads_clusters.bed",
+    "enz_sites_sample_reads_clusters_of_interest.bed"
+    ]
+
+find_unique_pos:
+    [
+    "good_clusters.bed",
+    "clusters_without_pstI.bed",
+    "msdartseq_positions.bed"
+    ]
+
+featurecounts:
+    [
+    "msdartseq_positions.saf",
+    "msdartseq_counts"
+    ]
+
+names_correspondence: bam_to_samples_names.csv
+
+counts_correction:
+    [
+    "msdartseq_positions_fixed.bed",
+    "msdartseq_counts_fixed.tst"
+    ]
+
+marks_with_msp_outputs:
+    [
+    "marks_with_counts_bigger_than_0",
+    ]
+
+find_methylation_site_position_inputs_p1:
+    [
+    "BSgenome.Egrandis.JGI.297_2.0.tar.gz"
+    ]
+
+find_methylation_site_position_inputs_p2:
+    [
+    "mspI_pstI_sites.fa"
+    ]
+find_methylation_site_position_outputs_p2:
+    [
+    "msp_pst_sites_positions",
+    "mspI_sites"
+    ]
+
+detemines_sampled_site_position:
+    [
+    "msdartseq_sequenced_fragments",
+    "msdartseq_methylation_sites_of_sequenced_fragments",
+    "ms_dartseq_counts"
+    ]
+
+fragments_analysis_outptus:
+    [
+    "all_fragments_generated_with_pstI_mspI_disgestion",
+    "fragments_descriptive_statistics",
+    "fragments_distribution_comparison"
+    ]
+
+dist_graph:
+    [
+    "msdartseq_tested_methylation_sites.png",
+    "msdartseq_intersection_methylation_sites.png"
+    ]
+
+intersect_marks_params:
+    prefix: ["sites_on_the_intersection/MS-DArT"]
+    grupos_intersect: ["true_sites/MS-DArT_marks_with_counts_bigger_than_0.txt"]
+intersect_marks_inputs_g4:
+    [
+    "AEC144_unic_mapped_dart_marks_non_overlap",
+    "CNB10_unic_mapped_dart_marks_non_overlap",
+    "FIB6075_unic_mapped_dart_marks_non_overlap",
+    "GG100_unic_mapped_dart_marks_non_overlap",
+    "VER361_unic_mapped_dart_marks_non_overlap"
+    ]
+
+edgeR_with_DArTCounts_params:
+    groups: ["4"]
+    prefix: edgeR_results/edger_group
+    sep_into: 3
+    subset_model: "intersect"
+    no_bio_rep: "FALSE"
+    dispersion: "NULL"
+    min_msp: 3
+    fdr: 0.05
+    log_fold_change: 2
+    filter: "posit"
+    number_of_tec_rep: 1
+    samples_with_tec_reps:
+        ["empty"]
+    samples_without_rep:
+        ["empty"]
+
+group_definition:
+    ["msdartseq"]
+enzymes:
+    [
+    "ms",
+    "hp"
+    ]
+places_g4:
+    ["g4"]
+clones_names:
+    [
+    "BRASUZ1"
+    ]
+tissues_g4:
+    [
+    "leaf.ad",
+    "leaf.juv",
+    "wood"
+    ]
+reference_genome: "Egrandis_297_v2.0.softmasked.fa"
+genome_annotation_file: "Egrandis_297_v2.0.gene_exons.gff3"
+transposons_file: "Egrandis_297_v2.0_transposons.bed"
+
+DEseq2_with_DArTCounts_params:
+    groups: ["4"]
+    prefix: DEseq2_results/deseq_group
+    sep_into: 3
+    subset_model: "intersect"
+    no_bio_rep: "FALSE"
+    dispersion: "NULL"
+    min_msp: 3
+    intersect_file: "grupo4_intersect_marks.txt"
+    fdr: 0.05
+    log_fold_change: 2
+    filter: "posit"
+    number_of_tec_rep: 1
+    samples_with_tec_reps:
+        ["empty"]
+    samples_without_rep:
+        ["empty"]
+
+edger_vs_deseq2_output:
+    [
+    "edger_DEseq2_consensus_DM_fragments.tst",
+    "edger_DEseq2_consensus_methylated_sites.tst",
+    "edgeR_vs_DEseq2_methylated_sites.svg"
+    ]
+
+reproducibility_plot_name:
+    [
+    "reproducibility_plot",
+    "images/reprodutibility/Brasuz_correlation_plot"
+    ]
+
+make_bed_methylated_sites:
+    [
+    "Brasuz1_methylatied_sites.bed",
+    "Brasuz1_methylatied_sites_only_plus.bed"
+    ]
+
+genomic_context_outputs:
+    [
+    "gene_features_sorted.gff3",
+    "intersect_marks_genes.txt",
+    "intersect_marks_transposons.txt",
+    "marks_in_exons.txt",
+    "methylation_within_exon_with_TE.txt",
+    "methylation_outside_exon_within_TE.txt",
+    "Mehylated_sites_distribution_graph.svg"
+    ]
+p1_out1: "genomic_context_files/marks_within_genes.bed"
+p1_out2: "genomic_context_files/marks_outside_genes.bed"
+p2_out1: "genomic_context_files/marks_within_transposons.bed"
+p2_out2: "genomic_context_files/marks_intergenic_and_outside_TEs.bed"
+p3_out1: "genomic_context_files/methylations_within_exons.bed"
+p3_out2: "genomic_context_files/methylations_within_exons_of_overlaping_genes.bed"
+p3_out3: "genomic_context_files/methylations_within_genes_but_outside_exons.bed"
+p4_out1: "genomic_context_files/methylations_within_exons_not_overlaping_TEs.bed"
+p4_out2: "genomic_context_files/methylations_within_exons_overlaping_TEs.bed"
+p4_out3: "genomic_context_files/methylations_within_TEs_in_intron_or_UTR.bed"
+p4_out4: "genomic_context_files/methylations_within_intron_or_UTR.bed"
+
+distance_to_genes_outputs:
+    [
+    "distance_to_genes_features.txt"
+    ]
+
+distance_to_transposons_outputs:
+    [
+    "distance_to_transposons_features.txt"
+    ]
+
+restriction_sites_distance_to_genes_and_TEs:
+  [
+  "mspI_distance_to_transposons_features",
+  "mspI_distance_to_genes_features"
+  ]
+
+distance_to_genes_and_transposon_outputs:
+    [
+    "distance_to_genes_and_transposon_marks_10kb",
+    "sitios_mspI_fora_de_genes_e_tes_distancia"
+    ]
+
+transposons_plots:
+    transposons_for_sample:
+        [
+        "group4_intersect_DE_transposons.txt"
+        ]
+    transposons_table:
+        [
+        "transposons_classification_table.tst"
+        ]
+    transposons_venn:
+        [
+        "BRASUZ1_venn_plots_transposons.svg"
+        ]
+    transposon_bar_plot:
+        [
+        "transposons_classification.svg",
+        "transposons_classification_normalized.svg"
+        ]
+transposons_plots_params:
+  use_intersections: "FALSE"
+
+Circos_inputs:
+    ["gene_features_sorted.bed"]
+Circos_params:
+    output_name: ["Circos_plot"]
+    plot_type: "h"
+    bin_size: 250000
+    colors: '#8A2BE2,#EE3B3B,#0000FF,#008B00'
+    fix_scale: TRUE
+    scale_min: 0,0,0,0
+    scale_max: 50,50,100,200
+    scale: TRUE
+    define_colors: TRUE
+    data_names: Tested_sites,Methylated_sites,Genes,Transposons
+    karyotype: "E_grandis_circos_chr_sizes.txt"
+
+outputs_pcas:
+    [
+    "pca_group4_all_true_sites_samples.svg",
+    "pca_group4_only_DM_sites_samples.svg"
+    ]
+
+venn_plots:
+    outputs:
+        [
+    "group4_methylations_outside_genes_or_transposons_per_sample.txt",
+    "group4_methylated_transposons_per_sample.txt",
+    "BRASUZ1_venn_plots",
+    "BRASUZ1_venn_plots_marks_out_gene_or_transposon",
+    "BRASUZ1_venn_plots_marks_in_transposon",
+    "BRASUZ1_venn_plots_marks_in_genes",
+    "BRASUZ1_Adult_leaf_vs_Juvenile_leaf_vs_Xylem_intersection",
+    "BRASUZ1_only_Adult_leaf_vs_Juvenile_leaf_intersection",
+    "BRASUZ1_only_Adult_leaf_vs_Xylem_intersection",
+    "BRASUZ1_only_Juvenile_leaf_vs_Xylem_intersection",
+    "BRASUZ1_all_Adult_leaf_vs_Juvenile_leaf_intersection",
+    "BRASUZ1_all_Adult_leaf_vs_Xylem_intersection",
+    "BRASUZ1_all_Juvenile_leaf_vs_Xylem_intersection",
+    "BRASUZ1_Adult_leaf_exclusive",
+    "BRASUZ1_Juvenile_leaf_exclusive",
+    "BRASUZ1_Xylem_exclusive"
+        ]
+    file_name: methylated_marks_by_clone.svg
+venn_plots_params:
+    tissues:
+        [
+        "Adult_leaf",
+        "Juvenile_leaf",
+        "Xylem"
+        ]
+    clone_name: venn_files/BRASUZ1
+    save_ids: TRUE
+
+biomart_params:
+    its_in_listMarts: "no"
+    biomart_name: "phytozome_mart"
+    biomart_dataset: "phytozome"
+    biomart_host: "https://phytozome.jgi.doe.gov:443/biomart/martservice"
+    biomart_vschema: "zome_mart"
+    c_name: 2
+    annotation_file_rda: E_grandis_all_genes_biomart.rda
+biomart_output:
+    ["biomart_annot_table.txt"]
+
+make_annotation_table:
+    annotation_table_inputs:
+        [
+        "Egrandis_297_v2.0_blast2GO.txt",
+        ]
+    annotation_table_output:
+        [
+        "BRASU1_tested_site_distance_to_genes.txt",
+        "anotacao_combinada_blast2GO_biomart_final.txt",
+        "annot_final.rda"
+        ]
+enrichment_params:
+    OrgDb_package_name: "org.Egrandis.eg.db"
+    col_gene_name: 2
+    pAdjustMethod: "fdr"
+    change_universe: TRUE
+    universe_subset: "sampled_mspI_fisher_test/names_of_genes_with_sites_mspI_sequenced.txt"
+    pvalueCutoff: 0.05
+    qvalue: 0.05
+    sim_cutoff: 0.7
+    number_of_terms_by_plot: 20
+    plot_by: "count"
+
+annotation_search_params:
+    sufix_g4: group4_all_marks
+    list_by: gene
+    query_is: mark
+    isoform_name: FALSE
+    groups: ["group4"]
+    query_is_file: FALSE
+
+annotation_search_outputs:
+    [
+    "group4_methylated_genes_per_sample.tst",
+    "BRASUZ1_leaf.ad_group4_by_genes.tst",
+    "BRASUZ1_leaf.juv_group4_by_genes.tst",
+    "BRASUZ1_wood_group4_by_genes.tst"
+    ]
+annotation_search_enrichment_outputs:
+    [
+    "GO_terms_BP",
+    "GO_terms_CC",
+    "GO_terms_MF"
+    ]
+
+annotation_venn_outputs:
+    [
+"BRASUZ1_Adult_leaf_vs_Juvenile_leaf_vs_Xylem_intersection_annotation_by_genes.txt",
+"BRASUZ1_only_Adult_leaf_vs_Juvenile_leaf_intersection_annotation_by_genes.txt",
+"BRASUZ1_only_Adult_leaf_vs_Xylem_intersection_annotation_by_genes.txt",
+"BRASUZ1_only_Juvenile_leaf_vs_Xylem_intersection_annotation_by_genes.txt",
+"BRASUZ1_all_Adult_leaf_vs_Juvenile_leaf_intersection_annotation_by_genes.txt",
+"BRASUZ1_all_Adult_leaf_vs_Xylem_intersection_annotation_by_genes.txt",
+"BRASUZ1_all_Juvenile_leaf_vs_Xylem_intersection_annotation_by_genes.txt",
+"BRASUZ1_Adult_leaf_exclusive_annotation_by_genes.txt",
+"BRASUZ1_Juvenile_leaf_exclusive_annotation_by_genes.txt",
+"BRASUZ1_Xylem_exclusive_annotation_by_genes.txt"
+    ]
+annotation_files_outputs:
+    [
+    "distance_to_genes_features_all_unic_mapped_dart_marks.txt",
+    "distance_to_transposons_all_unic_mapped_dart_marks.txt"
+    ]
+
+sampled_mspI_fisher_test_output:
+    [
+    "genome_sites_mspI.bed",
+    "mspI_genes_intersect.txt",
+    "tested_mspI_genes_intersect.txt",
+    "names_of_genes_with_sites_mspI_sequenced.txt"
+    ]
+genes_with_GBM:
+        gbm_list: 13059_2016_1059_MOESM4_ESM.csv
+
+bissulfite_bb:
+  [
+  "zr1276_1_CpG_meth"
+  ]
+
+bs_binomial_test: BS_CpGs_with_fdr_correction
+
+cpgs_validation: cpgs_validation_methy_info_CpG_raw.rda
+
+ms_dart_seq_validation:
+  [
+  "brasuz_sampled_restriction_sites_mspI",
+  "methy_info_of_all_msdart_sites",
+  "ms_dartseq_meth_sites_Bsseq_validation_table"
+  ]
+
+counts_larger_than_threshold: all_samples_msp_bigger_than_threshold.txt
